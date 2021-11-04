@@ -1,0 +1,26 @@
+#docker-compose.yml
+version: "3.0"
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: reference_api
+      POSTGRES_SERVER: db
+      POSTGRES_PASSWORD: reference_api
+      BACKEND_CORS_ORIGINS: '["http://localhost"]'
+    ports:
+      - "8000:8000"
+    restart: always
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: reference_api
+      POSTGRES_DB: reference
+      POSTGRES_PASSWORD: reference_api
+    ports:
+      - "5432:5432"
+    restart: always
