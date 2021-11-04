@@ -24,6 +24,20 @@ curl -X 'GET' \
 }
 ```
 
+### For automated queries, use the following snippet:
+
+```
+from requests import Session
+
+def get_sku_by_ean(ean: str) -> dict:
+    session = Session()
+    session.headers = {'X-Token': 'token'}
+        
+    with session as client:
+        response = client.get(f'https://reference-api-mbhqfkchoq-ew.a.run.app/pim_ean/{ean}')
+        response.raise_for_status()
+        return response.json()
+```
 
 ## How to run the app locally
 
