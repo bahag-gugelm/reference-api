@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.params import Depends
 
 from fastapi_crudrouter import OrmarCRUDRouter
 
 from app.core.config import settings
 from app.db import database
+from app.utils.dependencies import verify_token
 
 from app.models.reference import PimEan
 from app.routers import pim_ean
@@ -32,16 +34,6 @@ async def startup() -> None:
     if not database_.is_connected:
         await database_.connect()
 
-    # su = await UserModel.objects.get_or_none(email=settings.FIRST_SUPERUSER)
-    # if not su:
-    #     await UserModel.objects.create(
-    #         email=settings.FIRST_SUPERUSER,
-    #         hashed_password=get_password_hash(settings.FIRST_SUPERUSER_PASSWORD),
-    #         is_superuser=True,
-    #         is_active=True,
-    #         is_verified=True
-    #         )
-
 
 @app.on_event("shutdown")
 async def shutdown() -> None:
@@ -54,7 +46,13 @@ app.include_router(
     OrmarCRUDRouter(
         schema=PimEan,
         prefix="reference/pim_ean",
-        tags=['CRUD']
+        tags=['CRUD'],
+        get_all_route=[Depends(verify_token)],
+        get_one_route=[Depends(verify_token)],
+        create_route=[Depends(verify_token)],
+        update_route=[Depends(verify_token)],
+        delete_one_route=[Depends(verify_token)],
+        delete_all_route=[Depends(verify_token)]
     )
 )
 
