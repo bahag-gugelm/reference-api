@@ -15,9 +15,10 @@ async def lookup(query: str, dependencies=Depends(verify_token)):
     else:
         resp = await PimQuery20_5.objects.get_or_none(Variant_product=query)
 
-    return {
-        'variant_product': resp.Variant_product,
-        'base_product': resp.Base_product,
-        'material_group': resp.Material_group.split(' - ')[0],
-        'ean': resp.EAN,
-    }
+    if resp:
+        return {
+            'variant_product': resp.Variant_product,
+            'base_product': resp.Base_product,
+            'material_group': resp.Material_group.split(' - ')[0],
+            'ean': resp.EAN,
+        }
