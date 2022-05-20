@@ -10,6 +10,7 @@ from app.utils.dependencies import verify_token
 
 from app.models.reference import PimEan
 from app.routers import pim_ean
+from app.routers import pic_rights
 
 
 
@@ -56,7 +57,14 @@ app.include_router(
     )
 )
 
+
 app.include_router(
     pim_ean.router,
     tags=["EAN lookup"]
+)
+
+
+app.include_router(
+    pic_rights.router,
+    tags=["Generate copyrights request docs"]
 )
