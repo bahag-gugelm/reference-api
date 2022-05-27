@@ -1,7 +1,7 @@
 # Dockerfile
 FROM python:3.9
 
-WORKDIR /opt/products_comp
+WORKDIR /opt/utils_api
 
 # setting up the virtualenv
 ENV VIRTUAL_ENV=/opt/venv
@@ -10,6 +10,8 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # copying the project files
 COPY . /opt/products_comp
+
+RUN apt-get update -y && apt-get install weasyprint -y
 # needed to prevent from breaking on rfc6266 install
 RUN pip install setuptools==57.5.0
 # installing reqs
