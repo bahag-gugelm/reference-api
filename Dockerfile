@@ -9,7 +9,7 @@ RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # copying the project files
-COPY . /opt/products_comp
+COPY . /opt/utils_api
 
 RUN apt-get update -y && apt-get install weasyprint -y
 # needed to prevent from breaking on rfc6266 install
