@@ -61,10 +61,13 @@ class MediaRightsRequestPack:
         return dead_links
     
     def _save_html(self, html):
-        shutil.copytree(
-            os.path.join(templates_path, 'assets'),
-            os.path.join(self.html_dir, 'assets')
-            )
+        try:
+            shutil.copytree(
+                os.path.join(templates_path, 'assets'),
+                os.path.join(self.html_dir, 'assets')
+                )
+        except:
+            pass
         with open(os.path.join(self.html_dir, 'pics_rights.html'), 'w') as f:
             f.write(html)
 
