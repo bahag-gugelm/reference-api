@@ -92,11 +92,18 @@ class PimQuery29(ormar.Model):
     AM_ExcelFileWithPath = ormar.String(max_length=500)
 
 
-class IcecatIndex(ormar.Model):
+class IcecatSKU(ormar.Model):
     class Meta(BaseMeta):
-        tablename = "icecat_index"
+        tablename = "icecat_sku"
 
     id = ormar.Integer(primary_key=True)
     sku = ormar.String(max_length=100)
     brand = ormar.String(max_length=100)
-    ean = ormar.String(max_length=5000)
+
+
+class IcecatEAN(ormar.Model):
+    class Meta(BaseMeta):
+        tablename = "icecat_ean"
+
+    id = ormar.Integer()
+    ean = ormar.String(primary_key=True, max_length=13)
