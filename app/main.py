@@ -11,6 +11,7 @@ from app.utils.dependencies import verify_token
 from app.models.reference import PimEan
 from app.routers import pim_ean
 from app.routers import pic_rights
+from app.routers import icecat_index
 
 
 
@@ -63,6 +64,10 @@ app.include_router(
     tags=["EAN lookup"]
 )
 
+app.include_router(
+    icecat_index.router,
+    tags=["Manufacturer SKU-EAN lookup"]
+)
 
 app.include_router(
     pic_rights.router,
