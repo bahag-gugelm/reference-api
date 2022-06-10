@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
-from app.models.reference import IcecatSKU, IcecatEAN, IcecatIndex
+from app.models.reference import IcecatIndex
 from app.utils.dependencies import verify_token
-import json
+
 
 router = APIRouter()
 
