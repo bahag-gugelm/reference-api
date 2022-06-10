@@ -101,9 +101,11 @@ class IcecatSKU(ormar.Model):
     brand = ormar.String(max_length=100)
 
 
-class IcecatEAN(ormar.Model):
+class IcecatIndex(ormar.Model):
     class Meta(BaseMeta):
-        tablename = "icecat_ean"
+        tablename = "icecat_index"
 
-    id = ormar.Integer()
     ean = ormar.String(primary_key=True, max_length=13)
+    id = ormar.Integer()
+    sku = ormar.String(max_length=100)
+    brand = ormar.String(max_length=100)
