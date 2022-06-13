@@ -15,12 +15,17 @@ async def lookup(sku: str, brand: str, dependencies=Depends(verify_token)):
             item = json.loads(item.json())
             ean = item.get("ean")
             if len(ean)==13:
-                resp =  await PimQuery20_5.objects.get_or_none(EAN=ean)
+                resp =  await PimQuery20_5.objects.all(EAN=ean)
                 if resp:
-                    resp.update({
+                    resp = json.loads(resp[0].json())
+                    resp = {
+                        "ean": resp.get("EAN"),
+                        "variant_product":resp.get("Variant_product"),
+                        "base_product": resp.get("Base_product"),
+                        "material_group": resp.get("Material_group"),
                         "sku": sku,
                         "brand": brand
-                    })
+                    }
                     response.append(resp)
                 else:
                     response.append({
