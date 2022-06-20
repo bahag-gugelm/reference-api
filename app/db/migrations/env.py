@@ -15,7 +15,7 @@ sys.path.append(os.getcwd())
 from app.core.config import settings
 from app.db import metadata
 
-from app.models.reference import PimEan, PimQuery20_5, PimQuery29
+from app.models.reference import PimQuery20_5, PimQuery29, IcecatIndex
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
