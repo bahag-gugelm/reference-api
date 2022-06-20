@@ -8,7 +8,7 @@ from app.core.config import settings
 from app.db import database
 from app.utils.dependencies import verify_token
 
-from app.models.reference import PimEan
+from app.models.reference import PimQuery20_5, PimQuery29
 from app.routers import pim_ean
 from app.routers import pic_rights
 from app.routers import icecat_index
@@ -46,8 +46,21 @@ async def shutdown() -> None:
 
 app.include_router(
     OrmarCRUDRouter(
-        schema=PimEan,
-        prefix="reference/pim_ean",
+        schema=PimQuery20_5,
+        prefix="reference/pim_q205",
+        tags=['CRUD'],
+        get_all_route=[Depends(verify_token)],
+        get_one_route=[Depends(verify_token)],
+        create_route=[Depends(verify_token)],
+        update_route=[Depends(verify_token)],
+        delete_one_route=[Depends(verify_token)],
+        delete_all_route=[Depends(verify_token)]
+    )
+)
+app.include_router(
+    OrmarCRUDRouter(
+        schema=PimQuery29,
+        prefix="reference/pim_q29",
         tags=['CRUD'],
         get_all_route=[Depends(verify_token)],
         get_one_route=[Depends(verify_token)],
