@@ -28,8 +28,6 @@ def upgrade():
                nullable=True)
     op.create_index(op.f('ix_PIM_query29_Variant_product'), 'PIM_query29', ['Variant_product'], unique=False)
     op.drop_column('PIM_query29', 'Value_position')
-    op.drop_column('PIM_query29', 'id')
-    op.add_column('PIM_query29', sa.Column('_id', sa.Integer(), nullable=False))
     op.drop_column('PIM_query29', 'AM_SystemModified')
     op.drop_column('PIM_query29', 'AM_ExcelFileWithPath')
     op.drop_column('PIM_query29', 'AM_SystemCreated')
@@ -49,10 +47,8 @@ def downgrade():
     op.alter_column('PIM_query29', 'Value_language',
                existing_type=sa.VARCHAR(length=35),
                nullable=False)
-    op.drop_column('PIM_query29', '_id')
     op.add_column('PIM_query20_5', sa.Column('AM_SystemCreated', postgresql.TIMESTAMP(), autoincrement=False, nullable=False))
     op.add_column('PIM_query20_5', sa.Column('AM_ExcelFileWithPath', sa.VARCHAR(length=500), autoincrement=False, nullable=False))
     op.add_column('PIM_query20_5', sa.Column('AM_SystemModified', postgresql.TIMESTAMP(), autoincrement=False, nullable=False))
-    op.add_column('PIM_query20_5', sa.Column('id', sa.INTEGER(), server_default=sa.text('nextval(\'"PIM_query20_5_id_seq"\'::regclass)'), autoincrement=True, nullable=False))
     op.drop_index(op.f('ix_PIM_query20_5_EAN'), table_name='PIM_query20_5')
     # ### end Alembic commands ###

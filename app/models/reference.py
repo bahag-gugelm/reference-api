@@ -56,7 +56,7 @@ class PimQuery29(ormar.Model):
     class Meta(BaseMeta):
         tablename = "PIM_query29"
     
-    _id = ormar.Integer(primary_key=True)
+    id = ormar.Integer(primary_key=True)
     Material_group = ormar.String(max_length=60, nullable=True)
     Variant_product = ormar.String(max_length=60, index=True)
     Mandators = ormar.String(max_length=33, nullable=True)
