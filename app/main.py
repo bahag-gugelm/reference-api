@@ -10,7 +10,6 @@ from app.utils.dependencies import verify_token
 
 from app.models.reference import PimQuery20_5, PimQuery29
 from app.routers import pim_ean
-from app.routers import pic_rights
 from app.routers import icecat_index
 
 
@@ -82,7 +81,3 @@ app.include_router(
     tags=["Manufacturer SKU-EAN lookup"]
 )
 
-app.include_router(
-    pic_rights.router,
-    tags=["Generate copyrights request docs"]
-)
