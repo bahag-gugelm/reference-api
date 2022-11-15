@@ -9,7 +9,7 @@ from app.db import database
 from app.utils.dependencies import verify_token
 
 from app.models.reference import PimQuery20_5, PimQuery29
-from app.routers import pim_ean
+from app.routers import pim_data
 from app.routers import icecat_index
 
 
@@ -70,9 +70,8 @@ app.include_router(
     )
 )
 
-
 app.include_router(
-    pim_ean.router,
+    pim_data.router,
     tags=["EAN lookup"]
 )
 
