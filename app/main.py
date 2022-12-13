@@ -7,16 +7,21 @@ from fastapi_crudrouter import OrmarCRUDRouter
 from app.core.config import settings
 from app.db import database
 from app.utils.dependencies import verify_token
+from app.utils.middleware import RequestTimingMiddleware
 
 from app.models.reference import PimQuery20_5, PimQuery29
 from app.routers import pim_data
 from app.routers import icecat_index
+
+from starlette.middleware.base import BaseHTTPMiddleware
 
 
 
 app = FastAPI()
 app.state.database = database
 
+timing_middleware = RequestTimingMiddleware()
+app.add_middleware(BaseHTTPMiddleware, dispatch=timing_middleware)
 
 # Set all CORS enabled origins
 if settings.BACKEND_CORS_ORIGINS:
